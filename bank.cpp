@@ -80,7 +80,82 @@ int bank() {
                 saveAccounts(accounts);
                 break;
             }
+            case 2: {
+              string deleteId;
+              cout << "Enter ID to delete: ";
+              getline(cin, deleteId);
+              auto it = accounts.find(deleteId);
+              if (it != accounts.end()){
+                accounts.erase(deleteId);
+                saveAccounts(accounts);
+              }
+              else{
+                cout << "Account with ID " << deleteId << " not found\n";
+              }
+              break;
 
+            }
+
+            case 3: {
+              string searchId;
+                cout << "Enter Account ID to search: ";
+                getline(cin, searchId);
+                auto it = accounts.find(searchId);
+                if (it != accounts.end()) {
+                      string binput;
+                      double balance;
+                      cout << "Enter ammount to Add: ";
+                      while(true){
+                        getline(cin, binput);
+                        if(isNumber(binput)){
+                          balance = stoi(binput);
+                          if(balance < 0){
+                            cout <<"Invalid input!, please enter a positive amount!\n";
+                          }else{
+                            it -> second.balance += balance;
+                            saveAccounts(accounts);
+                            break;
+                          }
+                        }
+                        else{
+                          cout << "Invalid input!, please add a value! \n";
+                        }
+                      }
+
+                } else {
+                    cout << "Account with ID " << searchId << " not found\n";
+                }
+                break;
+            }
+            case 4: {
+              string searchId;
+              cout<<"Enter the ID to withdraw money: ";
+              getline(cin, searchId);
+              auto it = accounts.find(searchId);
+              if (it != accounts.end()){
+                string input;
+                double balance;
+                cout<<"Enter ammount to withdraw";
+                while(true){
+                  getline(cin, input);
+                  if(isNumber(input)){
+                    balance = stoi(input);
+                    if(balance < 0){
+                      cout <<"Please enter a postivie amount to Withdraw!\n";
+                    } else {
+                      it -> second.balance -= balance;
+                      saveAccounts(accounts);
+                      break;
+                    }
+                  }
+                  else{
+                    cout << "Invalid Input!, Please give a valid ammount!\n";
+                  }
+                }
+              }else {
+                cout<<"The ID: "<<searchId<<" Wasnt found!";
+              }
+            }
             case 5: {
                 string searchId;
                 cout << "Enter Account ID to search: ";

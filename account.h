@@ -31,6 +31,7 @@ using namespace std;
         id = generateUniqueID();
         name = "";
         lastname = "";
+        
     }
 
     Account( string name, string lastname): name(name), lastname(lastname) {
